@@ -1,8 +1,11 @@
+import os
 from flask import Flask
 from flask_restful import Resource, Api
 from flask_cors import CORS
 
 app = Flask(__name__)
+environment_configuration = os.environ.get('CONFIGURATION_SETUP')
+app.config.from_object(environment_configuration)
 CORS(app)
 api = Api(app)
 

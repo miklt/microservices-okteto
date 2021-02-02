@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: microservices-okteto-backend
 spec:  
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 5000
