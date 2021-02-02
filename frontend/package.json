@@ -10,6 +10,7 @@
   "dependencies": {
     "autoprefixer": "^10.0.4",
     "isomorphic-unfetch": "latest",
+    "moment": "latest",
     "next": "latest",
     "postcss": "^8.1.10",
     "react": "^16.13.1",
