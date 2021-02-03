@@ -13,13 +13,43 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- task: KubernetesManifest@0
-  displayName: Deploy
+- task: Kubernetes@0
+  displayName: kubectl apply deployment-backend.yml
   inputs:
-    kubernetesServiceConnection: 'okteto_service_connection'
+    connectionType: Kubernetes Service Connection
+    kubernetesServiceEndpoint: 'okteto_service_connection'
     namespace: 'miklt'
-    manifests: |
-      k8s/deployment-backend.yml
+    command: apply
+    arguments: -f k8s/deployment-backend.yml
+      
+- task: Kubernetes@0
+  displayName: kubectl apply deployment-frontend.yml
+  inputs:
+    connectionType: Kubernetes Service Connection
+    kubernetesServiceEndpoint: 'okteto_service_connection'
+    namespace: 'miklt'
+    command: apply
+    arguments: -f k8s/deployment-frontend.yml
+
+- task: Kubernetes@0
+  displayName: kubectl apply service-backend.yml
+  inputs:
+    connectionType: Kubernetes Service Connection
+    kubernetesServiceEndpoint: 'okteto_service_connection'
+    namespace: 'miklt'
+    command: apply
+    arguments: -f k8s/service-backend.yml
+
+- task: Kubernetes@0
+  displayName: kubectl apply service-frontend.yml
+  inputs:
+    connectionType: Kubernetes Service Connection
+    kubernetesServiceEndpoint: 'okteto_service_connection'
+    namespace: 'miklt'
+    command: apply
+    arguments: -f k8s/service-frontend.yml
+      
+      
       k8s/deployment-frontend.yml
       k8s/service-backend.yml
       k8s/service-frontend.yml   
