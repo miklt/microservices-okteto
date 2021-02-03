@@ -48,8 +48,3 @@ steps:
     namespace: 'miklt'
     command: apply
     arguments: -f k8s/service-frontend.yml
-      
-      
-      k8s/deployment-frontend.yml
-      k8s/service-backend.yml
-      k8s/service-frontend.yml   
