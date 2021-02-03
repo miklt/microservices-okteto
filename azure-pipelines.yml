@@ -13,7 +13,13 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: KubernetesManifest@0
+  displayName: Deploy
+  inputs:
+    kubernetesServiceConnection: 'okteto_service_connection'
+    namespace: 'miklt'
+    manifests: |
+      k8s/deployment-backend.yml
+      k8s/deployment-frontend.yml
+      k8s/service-backend.yml
+      k8s/service-frontend.yml   
