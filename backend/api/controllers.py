@@ -25,5 +25,5 @@ class Clima(Resource):
 class Cities(Resource):
     def get(self):
         cities = db.query(models.City).all()
-        return cities
+        return dict(cities)
 
