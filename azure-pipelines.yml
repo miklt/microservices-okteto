@@ -78,4 +78,4 @@ steps:
     kubernetesServiceEndpoint: '$(kubernetesServiceId)'
     namespace: '$(namespaceId)'
     command: set
-    arguments: image deployment/microservices-okteto-frontend microservices-okteto-backend=miklt/microservices-okteto-frontend:$(tag) --record
+    arguments: image deployment/microservices-okteto-frontend microservices-okteto-frontend=miklt/microservices-okteto-frontend:$(tag) --record
