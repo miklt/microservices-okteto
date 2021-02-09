@@ -64,10 +64,18 @@ steps:
     command: apply
     arguments: -f k8s/service-frontend.yml
 - task: Kubernetes@0
-  displayName: kubectl update image backen@deploy
+  displayName: kubectl update image backend@deploy
   inputs:
     connectionType: Kubernetes Service Connection
     kubernetesServiceEndpoint: '$(kubernetesServiceId)'
     namespace: '$(namespaceId)'
     command: set
     arguments: image deployment/microservices-okteto-backend microservices-okteto-backend=miklt/microservices-okteto-backend:$(tag) --record
+- task: Kubernetes@0
+  displayName: kubectl update image frontend@deploy
+  inputs:
+    connectionType: Kubernetes Service Connection
+    kubernetesServiceEndpoint: '$(kubernetesServiceId)'
+    namespace: '$(namespaceId)'
+    command: set
+    arguments: image deployment/microservices-okteto-frontend microservices-okteto-backend=miklt/microservices-okteto-frontend:$(tag) --record
