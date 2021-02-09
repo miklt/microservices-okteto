@@ -27,6 +27,16 @@ steps:
     tags: |
       $(tag)
       latest
+- task: Docker@2
+  displayName: Criar imagem docker do frontend
+  inputs:
+    repository: '$(dockerUserId)/$(frontendImageName)'
+    command: 'buildAndPush'
+    Dockerfile: 'frontend/Dockerfile'
+    containerRegistry: 'dockerHub'
+    tags: |
+      $(tag)
+      latest
 
 - task: Kubernetes@0
   displayName: kubectl apply deployment-backend.yml
@@ -70,7 +80,7 @@ steps:
     kubernetesServiceEndpoint: '$(kubernetesServiceId)'
     namespace: '$(namespaceId)'
     command: set
-    arguments: image deployment/microservices-okteto-backend microservices-okteto-backend=miklt/microservices-okteto-backend:$(tag) --record
+    arguments: image deployment/$(backendImageName) $(backendImageName)=$(dockerUserId)/$(backendImageName):$(tag) --record
 - task: Kubernetes@0
   displayName: kubectl update image frontend@deploy
   inputs:
@@ -78,4 +88,4 @@ steps:
     kubernetesServiceEndpoint: '$(kubernetesServiceId)'
     namespace: '$(namespaceId)'
     command: set
-    arguments: image deployment/microservices-okteto-frontend microservices-okteto-frontend=miklt/microservices-okteto-frontend:$(tag) --record
+    arguments: image deployment/$(frontendImageName) $(frontendImageName)=$(dockerUserId)/$(frontendImageName):$(tag) --record
