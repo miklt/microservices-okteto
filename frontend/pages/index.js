@@ -12,7 +12,7 @@ export default function Clima() {
     if (!data) return <div>Carregando dados...</div>
     return (
         <>
-            <div>Os dados vindos na nossa api indicam que em {name} as temperaturas registradas foram de:
+            <div className="font-medium">Os dados atualizados vindos na nossa api indicam que em {name} as temperaturas registradas foram de:
             <ul>
                 {data.map(t=>formatReading(t))}
             </ul>
